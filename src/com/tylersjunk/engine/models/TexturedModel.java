@@ -4,6 +4,8 @@ import com.tylersjunk.engine.textures.ModelTexture;
 
 public class TexturedModel {
 
+	public String name;
+
 	private RawModel rawModel;
 	private ModelTexture texture;
 	
