@@ -1,4 +1,4 @@
 l dragon dragonTexture dragon 1 10
-e dragon 0 10 -14 0 0 0 1
-e dragon 0 15 -14 0 180 0 1
+de moveDragon dragon 0 10 -14 0 0 0 1
+se dragon 0 15 -14 0 180 0 1
 end

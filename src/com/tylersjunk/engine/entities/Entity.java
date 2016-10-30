@@ -10,10 +10,22 @@ public class Entity {
 	private Vector3f position;
 	private float rotX,rotY,rotZ,scale;
 	public AABB bb;
-	
+
+	public String uniqueName;
 	
 	public Entity(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		super();
+		this.model = model;
+		this.position = position;
+		this.rotX = rotX;
+		this.rotY = rotY;
+		this.rotZ = rotZ;
+		this.scale = scale;
+	}
+
+	public Entity(String uniqueName, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
+		super();
+		this.uniqueName = uniqueName;
 		this.model = model;
 		this.position = position;
 		this.rotX = rotX;

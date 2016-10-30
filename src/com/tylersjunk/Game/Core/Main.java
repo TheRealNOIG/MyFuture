@@ -37,6 +37,8 @@ public class Main {
             KeyboardHelper.getKeyboard().update();
             camera.update();
 
+            levelManager.FindDynamicEntityByName("moveDragon").increaseRotation(0, 1, 0);
+
             //Render here
             levelManager.RenderCurrentLevel();
 

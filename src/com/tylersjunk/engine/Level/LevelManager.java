@@ -17,7 +17,8 @@ public class LevelManager {
     MasterRenderer renderer;
     TexturedModelLoader models;
 
-    public List<Entity> entities = new ArrayList<Entity>();
+    public List<Entity> staticEntities = new ArrayList<Entity>();
+    public List<Entity> dynamicEntities = new ArrayList<Entity>();
 
     public LevelManager(Loader loader, MasterRenderer renderer)
     {
@@ -57,11 +58,17 @@ public class LevelManager {
                         model.getTexture().setReflectivity(Float.valueOf(currentLine[4]));
                         model.getTexture().setShineDamper(Float.valueOf(currentLine[5]));
                     } catch(Exception e) {}
-                } else if (line.startsWith("e ")) {
+                } else if (line.startsWith("se ")) {
                     String[] currentLine = line.split(" ");
-                    entities.add(new Entity(models.findModelByName(currentLine[1]),
+                    staticEntities.add(new Entity(models.findModelByName(currentLine[1]),
                                                 new Vector3f(Float.valueOf(currentLine[2]), Float.valueOf(currentLine[3]), Float.valueOf(currentLine[4])),
                                                     Float.valueOf(currentLine[5]), Float.valueOf(currentLine[6]), Float.valueOf(currentLine[7]), Float.valueOf(currentLine[8])));
+                }  else if (line.startsWith("de ")) {
+                    String[] currentLine = line.split(" ");
+                    dynamicEntities.add(new Entity(String.valueOf(currentLine[1]),
+                                        models.findModelByName(currentLine[2]),
+                                            new Vector3f(Float.valueOf(currentLine[3]), Float.valueOf(currentLine[4]), Float.valueOf(currentLine[5])),
+                                                Float.valueOf(currentLine[6]), Float.valueOf(currentLine[7]), Float.valueOf(currentLine[8]), Float.valueOf(currentLine[9])));
                 } else if(line.startsWith("end"))
                 {
                     break;
@@ -75,9 +82,23 @@ public class LevelManager {
 
     public void RenderCurrentLevel()
     {
-        for(Entity entity: entities)
+        for(Entity entity: staticEntities)
         {
             renderer.processEntity(entity);
         }
+        for(Entity entity: dynamicEntities)
+        {
+            renderer.processEntity(entity);
+        }
+    }
+
+    public Entity FindDynamicEntityByName(String UniqueName)
+    {
+        for(Entity entity: dynamicEntities)
+        {
+            if(entity.uniqueName.equals(UniqueName))
+                return entity;
+        }
+        return null;
     }
 }
