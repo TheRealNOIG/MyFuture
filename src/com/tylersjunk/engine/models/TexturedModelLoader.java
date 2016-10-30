@@ -10,8 +10,8 @@ import java.util.List;
 
 public class TexturedModelLoader{
 
-    Loader loader;
-    List<TexturedModel> texturedModelsList = new ArrayList<TexturedModel>();
+    private Loader loader;
+    public List<TexturedModel> texturedModelsList = new ArrayList<TexturedModel>();
 
     public TexturedModelLoader(Loader loader)
     {
@@ -32,7 +32,7 @@ public class TexturedModelLoader{
     public TexturedModel findModelByName(String modelName)
     {
         for (TexturedModel model: texturedModelsList) {
-            if(model.name == modelName)
+            if(model.name.equals(modelName))
                 return model;
         }
         return null;

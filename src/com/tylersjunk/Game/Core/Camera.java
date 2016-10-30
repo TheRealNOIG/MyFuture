@@ -4,9 +4,7 @@ import com.tylersjunk.engine.toolbox.KeyboardHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
-/**
- * Created by Tyler on 10/23/2016.
- */
+
 public class Camera extends com.tylersjunk.engine.entities.Camera {
 
     public Camera(float boundingBoxWidth, float boundingBoxHeight, Vector3f position) {

@@ -1,5 +1,6 @@
 package com.tylersjunk.Game.Core;
 
+import com.tylersjunk.engine.Level.LevelManager;
 import com.tylersjunk.engine.entities.Entity;
 import com.tylersjunk.engine.entities.Light;
 import com.tylersjunk.engine.models.RawModel;
@@ -27,14 +28,8 @@ public class Main {
         Camera camera = new Camera(0, 0, new Vector3f(0, 15, 10));
         Light light = new Light(new Vector3f(10, 5, 0), new Vector3f(1, 1, 1));
 
-        ModelData data = OBJLoader.loadOBJ("dragon");
-        RawModel model = loader.loadToVAO(data.getVertices(), data.getTextureCoords(), data.getNormals(), data.getIndices());
-        TexturedModel dragonModle = new TexturedModel(model, new ModelTexture(loader.loadTexture("dragonTexture")));
-        dragonModle.getTexture().setReflectivity(1);
-        dragonModle.getTexture().setShineDamper(10);
-
-        Entity dragon1 = new Entity(dragonModle, new Vector3f(0, 10, -14), 0, 0, 0, 1);
-        Entity dragon2 = new Entity(dragonModle, new Vector3f(0, 15, -14), 0, 0, 0, 1);
+        LevelManager levelManager = new LevelManager(loader, renderer);
+        levelManager.LoadLevel("leveltest");
 
         while(!Display.isCloseRequested())
         {
@@ -42,11 +37,8 @@ public class Main {
             KeyboardHelper.getKeyboard().update();
             camera.update();
 
-            dragon1.setRotY(dragon1.getRotY() + 1);
-
             //Render here
-            renderer.processEntity(dragon1);
-            renderer.processEntity(dragon2);
+            levelManager.RenderCurrentLevel();
 
             renderer.render(camera, light);
             DisplayManager.updateDisplay();
