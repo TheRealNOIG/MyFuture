@@ -11,10 +11,9 @@ import com.tylersjunk.engine.toolbox.KeyboardHelper;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
-/**
- * Created by Tyler on 10/23/2016.
- */
+
 public class Main {
+
     public static final int WIDTH = 1080;
     public static final int HEIGHT = WIDTH / 9 * 6;
 
