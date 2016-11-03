@@ -1,9 +1,25 @@
 Engine:
-    Add Terrain Height Map support
+
+    Terrain:
+        √ Add Terrain Height Map support
+        √TerrainCollision With Camera
+        Multitexturing terrain
+
+    Rendering:
+        Texture Atlases
+        SkyBox
+        Font Rendering
+        Particels
+        Animated Particels
+        Instanced Rendering for particels
 
     Shaders:
         Multy lights
         Fog
         Shadows
+        Multiple Lights
+        Point Light
+        Bloom
+        Cube map Reflections
 Game:
     Character movement

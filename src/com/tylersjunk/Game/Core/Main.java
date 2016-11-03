@@ -3,6 +3,7 @@ package com.tylersjunk.Game.Core;
 import com.tylersjunk.engine.Level.LevelManager;
 import com.tylersjunk.engine.entities.Entity;
 import com.tylersjunk.engine.entities.Light;
+import com.tylersjunk.engine.entities.Terrain;
 import com.tylersjunk.engine.models.RawModel;
 import com.tylersjunk.engine.models.TexturedModel;
 import com.tylersjunk.engine.renderEngine.*;
@@ -25,21 +26,24 @@ public class Main {
         MasterRenderer renderer = new MasterRenderer(75, 2000);
 
         Camera camera = new Camera(0, 0, new Vector3f(0, 15, 10));
-        Light light = new Light(new Vector3f(10, 5, 0), new Vector3f(1, 1, 1));
+        Light light = new Light(new Vector3f(-3000, 2000, -2000), new Vector3f(1, 1, 1));
 
         LevelManager levelManager = new LevelManager(loader, renderer);
         levelManager.LoadLevel("leveltest");
+
+        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("dragonTexture")), "heightmap");
 
         while(!Display.isCloseRequested())
         {
             //Game logic here
             KeyboardHelper.getKeyboard().update();
-            camera.update();
+            camera.update(terrain);
 
             levelManager.FindDynamicEntityByName("moveDragon").increaseRotation(0, 1, 0);
 
             //Render here
             levelManager.RenderCurrentLevel();
+            renderer.processTerrain(terrain);
 
             renderer.render(camera, light);
             DisplayManager.updateDisplay();

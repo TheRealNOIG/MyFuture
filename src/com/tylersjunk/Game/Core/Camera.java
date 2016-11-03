@@ -1,5 +1,6 @@
 package com.tylersjunk.Game.Core;
 
+import com.tylersjunk.engine.entities.Terrain;
 import com.tylersjunk.engine.renderEngine.DisplayManager;
 import com.tylersjunk.engine.toolbox.KeyboardHelper;
 import org.lwjgl.input.Keyboard;
@@ -11,13 +12,17 @@ public class Camera extends com.tylersjunk.engine.entities.Camera {
 
     private boolean isMouseLooked;
 
-    private float movementSpeed = 5f;
-    private float sideMovementSpeed = 4f;
-    private float verticalMovementSpeed = 0.5f;
+    private float movementSpeed = 50f;
+    private float sideMovementSpeed = 40f;
+    private float jumpIntensity = 100;
+    private static final float GRAVITY = 7f;
 
     private float currentSpeed;
     private float sideCurrentSpeed;
     private float verticalCurrentSpeed;
+
+    private float player_height = 13.5f;
+    private boolean isGrounded;
 
     public Camera(float boundingBoxWidth, float boundingBoxHeight, Vector3f position) {
         super(boundingBoxWidth, boundingBoxHeight, position);
@@ -26,12 +31,12 @@ public class Camera extends com.tylersjunk.engine.entities.Camera {
     }
 
     @Override
-    protected void update()
+    protected void update(Terrain terrain)
     {
-        handleInput();
+        handleInput(terrain);
     }
 
-    private void handleInput()
+    private void handleInput(Terrain terrain)
     {
         if(isMouseLooked)
         {
@@ -73,15 +78,12 @@ public class Camera extends com.tylersjunk.engine.entities.Camera {
         {
             sideCurrentSpeed = 0;
         }
-        if(KeyboardHelper.getKeyboard().isKeyDown(Keyboard.KEY_SPACE))
+        if(KeyboardHelper.getKeyboard().isKeyDown(Keyboard.KEY_SPACE) && isGrounded)
         {
-            verticalCurrentSpeed = verticalMovementSpeed;
-        } else if(KeyboardHelper.getKeyboard().isKeyDown(Keyboard.KEY_LSHIFT))
+            verticalCurrentSpeed = jumpIntensity;
+        } else
         {
-            verticalCurrentSpeed = -verticalMovementSpeed;
-        }else
-        {
-            verticalCurrentSpeed = 0;
+            verticalCurrentSpeed -= GRAVITY;
         }
         //endregion
 
@@ -95,6 +97,19 @@ public class Camera extends com.tylersjunk.engine.entities.Camera {
         vx = dx + sx;
         vz = dz + sz;
 
-        this.position = new Vector3f(this.position.getX() + vx, this.position.y + verticalCurrentSpeed, this.position.getZ() + vz);
+        Vector3f updatePosition = new Vector3f(this.position.getX() + vx, this.position.y + (verticalCurrentSpeed * DisplayManager.getFramTimeSecounds()), this.position.getZ() + vz);
+
+        float terrainHeight = terrain.getHeightOfTerrain(updatePosition.x, updatePosition.z);
+        if(updatePosition.y < terrainHeight + player_height)
+        {
+            isGrounded = true;
+            verticalCurrentSpeed = 0;
+            updatePosition.y = terrainHeight + player_height;
+        }else
+        {
+            isGrounded = false;
+        }
+
+        this.position = updatePosition;
     }
 }

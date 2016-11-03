@@ -41,4 +41,6 @@ public abstract class Camera {
 	public float getRoll() {
 		return roll;
 	}
+
+    protected abstract void update(Terrain terrain);
 }
