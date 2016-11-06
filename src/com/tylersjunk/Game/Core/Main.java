@@ -31,7 +31,7 @@ public class Main {
         LevelManager levelManager = new LevelManager(loader, renderer);
         levelManager.LoadLevel("leveltest");
 
-        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("dragonTexture")), "heightmap");
+        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass")), "heightmap");
 
         while(!Display.isCloseRequested())
         {
