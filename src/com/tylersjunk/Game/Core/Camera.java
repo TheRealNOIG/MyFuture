@@ -4,13 +4,10 @@ import com.tylersjunk.engine.entities.Terrain;
 import com.tylersjunk.engine.renderEngine.DisplayManager;
 import com.tylersjunk.engine.toolbox.KeyboardHelper;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector3f;
 
 
 public class Camera extends com.tylersjunk.engine.entities.Camera {
-
-    private boolean isMouseLooked;
 
     private float movementSpeed = 50f;
     private float sideMovementSpeed = 40f;
@@ -27,7 +24,7 @@ public class Camera extends com.tylersjunk.engine.entities.Camera {
     public Camera(float boundingBoxWidth, float boundingBoxHeight, Vector3f position) {
         super(boundingBoxWidth, boundingBoxHeight, position);
         Mouse.setGrabbed(true);
-        isMouseLooked = true;
+        Mouse.enabled = true;
     }
 
     @Override
@@ -38,7 +35,7 @@ public class Camera extends com.tylersjunk.engine.entities.Camera {
 
     private void handleInput(Terrain terrain)
     {
-        if(isMouseLooked)
+        if(Mouse.enabled)
         {
             float movePitch = this.pitch - Mouse.getDY() / 2;
             this.yaw += Mouse.getDX() / 2;
@@ -54,10 +51,10 @@ public class Camera extends com.tylersjunk.engine.entities.Camera {
 
         //region KeyBoard Input
         KeyboardHelper.getKeyboard().update();
-        if(KeyboardHelper.getKeyboard().isKeyDown(Keyboard.KEY_ESCAPE))
+        if(KeyboardHelper.getKeyboard().isKeyUp(Keyboard.KEY_ESCAPE))
         {
-            isMouseLooked = !isMouseLooked;
-            Mouse.setGrabbed(isMouseLooked);
+            Mouse.enabled = !Mouse.enabled;
+            Mouse.setGrabbed(Mouse.enabled);
         }
 
         if(KeyboardHelper.getKeyboard().isKeyDown(Keyboard.KEY_W)) {

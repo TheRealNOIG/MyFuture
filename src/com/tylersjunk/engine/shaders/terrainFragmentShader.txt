@@ -22,7 +22,7 @@ void main(void)
 	float nDotl = dot(unitNormal, unitLightVector);
 	float brightness = max(nDotl, 0.2);
 	float level = floor(brightness * levels);
-    brightness = level / levels;
+    //brightness = level / levels;
 	vec3 diffuse = brightness *  lightColor;
 	
 	vec3 unitVectorToCamera = normalize(toCameraVector);

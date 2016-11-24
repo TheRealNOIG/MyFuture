@@ -25,7 +25,7 @@ public class Main {
         Loader loader = new Loader();
         MasterRenderer renderer = new MasterRenderer(75, 2000);
 
-        Camera camera = new Camera(0, 0, new Vector3f(0, 15, 10));
+        Camera camera = new Camera(0, 0, new Vector3f(250, 15, 250));
         Light light = new Light(new Vector3f(-3000, 2000, -2000), new Vector3f(1, 1, 1));
 
         LevelManager levelManager = new LevelManager(loader, renderer);
