@@ -14,7 +14,6 @@ Engine:
         Instanced Rendering for particels
 
     Shaders:
-        Multy lights
         Fog
         Shadows
         Multiple Lights
@@ -22,4 +21,4 @@ Engine:
         Bloom
         Cube map Reflections
 Game:
-    Character movement
+    √Character movement

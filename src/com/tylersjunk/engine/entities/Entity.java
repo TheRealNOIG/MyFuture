@@ -33,6 +33,18 @@ public class Entity {
 		this.rotZ = rotZ;
 		this.scale = scale;
 	}
+
+	public Entity(Entity entity)
+	{
+		if(entity.uniqueName != null)
+			this.uniqueName = entity.uniqueName;
+		this.model = entity.model;
+		this.position = entity.position;
+		this.rotX = entity.rotX;
+		this.rotY = entity.rotY;
+		this.rotZ = entity.rotZ;
+		this.scale = entity.scale;
+	}
 	
 	public void increasePosition(float dx, float dy, float dz)
 	{

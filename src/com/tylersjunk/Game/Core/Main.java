@@ -1,5 +1,6 @@
 package com.tylersjunk.Game.Core;
 
+import com.tylersjunk.Game.Enemy.TestEnemy;
 import com.tylersjunk.engine.Level.LevelManager;
 import com.tylersjunk.engine.entities.Entity;
 import com.tylersjunk.engine.entities.Light;
@@ -33,6 +34,9 @@ public class Main {
 
         Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass")), "heightmap");
 
+        TestEnemy enem = new TestEnemy(levelManager.FindDynamicEntityByName("moveDragon"));
+//
+
         while(!Display.isCloseRequested())
         {
             //Game logic here
@@ -40,6 +44,8 @@ public class Main {
             camera.update(terrain);
 
             levelManager.FindDynamicEntityByName("moveDragon").increaseRotation(0, 1, 0);
+
+            enem.update();
 
             //Render here
             levelManager.RenderCurrentLevel();

@@ -1,4 +1,5 @@
 l dragon dragonTexture dragon 1 10
 de moveDragon dragon 10 10 20 0 0 0 0.5
 se dragon 450 0 650 0 180 0 5
+se dragon 400 0 650 0 180 10 2.5
 end
